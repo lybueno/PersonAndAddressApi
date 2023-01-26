@@ -1,6 +1,6 @@
 package io.github.lybueno.attornatus.controllers;
 
-import io.github.lybueno.attornatus.dto.PersonDTO;
+import io.github.lybueno.attornatus.dto.person.PersonDTO;
 import io.github.lybueno.attornatus.dto.person.PersonInsertDTO;
 import io.github.lybueno.attornatus.services.PersonService;
 import jakarta.validation.Valid;

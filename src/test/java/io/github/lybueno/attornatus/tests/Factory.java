@@ -17,7 +17,13 @@ public class Factory {
     }
 
     public static Address createAddress(){
-        Address address = new Address(1L, "IT Avenue", "00111-010",1010L, true, createPerson());
+        Address address = new Address();
+        address.setId(1L);
+        address.setAddress("IT Avenue");
+        address.setNumber(1010L);
+        address.setIsMainAddress(true);
+        address.setZipCode("00111-010");
+        address.setPerson(createPerson());
         return address;
     }
 }

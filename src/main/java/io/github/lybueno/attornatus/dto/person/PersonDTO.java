@@ -1,4 +1,4 @@
-package io.github.lybueno.attornatus.dto;
+package io.github.lybueno.attornatus.dto.person;
 
 import io.github.lybueno.attornatus.entities.Person;
 import jakarta.validation.constraints.NotBlank;

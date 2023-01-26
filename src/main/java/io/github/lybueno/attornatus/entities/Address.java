@@ -17,13 +17,10 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "{field.address.required}")
     private String address;
 
-    @NotBlank(message = "{field.zipCode.required}")
     private String zipCode;
 
-    @NotBlank(message = "{field.number.required}")
     private Long number;
 
     private Boolean isMainAddress = false;
