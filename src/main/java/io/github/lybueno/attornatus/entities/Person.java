@@ -23,11 +23,9 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "{field.name.required}")
     private String name;
 
     @Temporal(TemporalType.DATE)
-    @NotBlank(message = "{field.birthDate.required}")
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "person")
