@@ -1,0 +1,1 @@
+INSERT INTO tb_person (NAME, BIRTH_DATE) VALUES ('James Gosling', '1955-05-19');
