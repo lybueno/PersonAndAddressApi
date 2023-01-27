@@ -1,10 +1,10 @@
 package io.github.lybueno.attornatus.entities;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +24,8 @@ public class Address {
     private Long number;
 
     private Boolean isMainAddress = false;
+
+    private String city;
 
     @ManyToOne
     @JoinColumn(name = "person_id")

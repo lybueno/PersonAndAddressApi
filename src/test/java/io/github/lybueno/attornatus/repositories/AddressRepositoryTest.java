@@ -1,7 +1,6 @@
 package io.github.lybueno.attornatus.repositories;
 
 import io.github.lybueno.attornatus.entities.Address;
-import io.github.lybueno.attornatus.entities.Person;
 import io.github.lybueno.attornatus.tests.Factory;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

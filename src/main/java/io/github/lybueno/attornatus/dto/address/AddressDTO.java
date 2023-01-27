@@ -1,11 +1,12 @@
 package io.github.lybueno.attornatus.dto.address;
 
 import io.github.lybueno.attornatus.entities.Address;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -24,6 +25,9 @@ public class AddressDTO {
     @NotBlank(message = "{field.zipCode.required}")
     private String zipCode;
 
+    @NotBlank(message = "{field.city.required}")
+    private String city;
+
     private Long personId;
 
     public AddressDTO(Address entity){
@@ -31,6 +35,7 @@ public class AddressDTO {
         address = entity.getAddress();
         number = entity.getNumber();
         zipCode = entity.getZipCode();
+        city = entity.getCity();
         personId = entity.getPerson().getId();
     }
 

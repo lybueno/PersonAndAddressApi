@@ -17,12 +17,14 @@ class AddressTest {
         entity.setNumber(20L);
         entity.setZipCode("12.345-678");
         entity.setIsMainAddress(true);
+        entity.setCity("Wilmslow");
         entity.setPerson(new Person());
 
         Assertions.assertNotNull(entity.getId());
         Assertions.assertNotNull(entity.getAddress());
         Assertions.assertNotNull(entity.getNumber());
         Assertions.assertNotNull(entity.getZipCode());
+        Assertions.assertNotNull(entity.getCity());
         Assertions.assertNotNull(entity.getIsMainAddress());
         Assertions.assertNotNull(entity.getPerson());
 

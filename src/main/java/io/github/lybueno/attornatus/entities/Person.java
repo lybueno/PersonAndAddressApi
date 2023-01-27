@@ -1,13 +1,10 @@
 package io.github.lybueno.attornatus.entities;
 
-import jakarta.persistence.*;
-
-
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +22,6 @@ public class Person {
 
     private String name;
 
-    @Temporal(TemporalType.DATE)
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "person")

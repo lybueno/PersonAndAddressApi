@@ -4,7 +4,6 @@ import io.github.lybueno.attornatus.entities.Address;
 import io.github.lybueno.attornatus.entities.Person;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Factory {
 
@@ -23,6 +22,7 @@ public class Factory {
         address.setNumber(1010L);
         address.setIsMainAddress(true);
         address.setZipCode("00111-010");
+        address.setCity("London");
         address.setPerson(createPerson());
         return address;
     }
