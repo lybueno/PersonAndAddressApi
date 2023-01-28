@@ -79,4 +79,27 @@ public class PersonController {
         return ResponseEntity.ok().body(service.findAllByPersonId(id));
     }
 
+    @ApiOperation(value = "Returns mainaddress by person ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Returns person's main address"),
+            @ApiResponse(code = 404, message = "Person not found")
+    })
+    @GetMapping(value = "/{id}/main-address", produces="application/json")
+    public ResponseEntity<AddressDTO> findMainAddressByPerson(@PathVariable Long id){
+        return ResponseEntity.ok().body(service.findMainAddressByPersonId(id));
+    }
+
+    @ApiOperation(value = "Creates a person's address")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Address created"),
+            @ApiResponse(code = 404, message = "Person not found")
+    })
+    @PostMapping(value = "/{id}/address" ,produces="application/json", consumes="application/json")
+    public ResponseEntity<AddressDTO> createAddress(@PathVariable Long id, @Valid @RequestBody AddressDTO dto){
+        AddressDTO newDto = service.createAddressToPerson(id, dto);
+        URI uri =
+                ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}/address").buildAndExpand(dto.getId()).toUri();
+        return ResponseEntity.created(uri).body(newDto);
+    }
+
 }
