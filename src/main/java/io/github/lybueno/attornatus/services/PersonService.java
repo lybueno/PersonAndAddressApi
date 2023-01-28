@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,8 +45,10 @@ public class PersonService {
 
     @Transactional
     public PersonDTO insert(PersonInsertDTO dto) {
-        List<AddressDTO> proceddedListAddress = processAddresses(dto);
-        dto.setAddresses(proceddedListAddress);
+        if(dto.getAddresses().size() > 0){
+            List<AddressDTO> proceddedListAddress = processAddresses(dto);
+            dto.setAddresses(proceddedListAddress);
+        }
         Person entity = new Person();
         copyInsertDtoToEntity(dto, entity);
         entity = repository.save(entity);
@@ -64,19 +68,19 @@ public class PersonService {
 
     }
 
-    public void delete(Long id) {
-        try{
-            Optional<Person> person = repository.findById(id);
-            List<Address> addresses = person.get().getAddresses();
-            repository.deleteById(id);
-            if(person.isPresent()){
-                for (Address address : addresses){
-                    addressRepository.deleteById(address.getId());
-                }
-            }
-        } catch (EntityNotFoundException e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Id " + id + " not found");
+    @Transactional(readOnly = true)
+    public List<AddressDTO> findAllByPersonId(Long personId){
+
+        Optional<Person> obj = repository.findById(personId);
+        Person entity = obj.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Person not found"));
+        List<Address> list = addressRepository.findByPersonId(personId);
+
+        List<AddressDTO> dtoList = new ArrayList<>();
+        for (Address address : list) {
+            dtoList.add(new AddressDTO(address));
         }
+        return dtoList;
+
     }
 
     private void copyDtoToEntity(PersonDTO dto, Person entity){

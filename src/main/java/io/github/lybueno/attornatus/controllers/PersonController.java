@@ -69,15 +69,14 @@ public class PersonController {
         return ResponseEntity.ok().body(dto);
     }
 
-    @ApiOperation(value = "Deletes a person by ID")
+    @ApiOperation(value = "Returns all addresses by person ID")
     @ApiResponses(value = {
-            @ApiResponse(code = 204, message = "Person deleted"),
+            @ApiResponse(code = 200, message = "Returns person's addresses"),
             @ApiResponse(code = 404, message = "Person not found")
     })
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        service.delete(id);
-        return ResponseEntity.noContent().build();
+    @GetMapping(value = "/{id}/addresses", produces="application/json")
+    public ResponseEntity<List<AddressDTO>> findAllAddressByPerson(@PathVariable Long id){
+        return ResponseEntity.ok().body(service.findAllByPersonId(id));
     }
 
 }
