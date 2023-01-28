@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
@@ -18,7 +19,7 @@ public class PersonDTO {
     @NotBlank(message = "{field.name.required}")
     private String name;
 
-    @NotBlank(message = "{field.birthDate.required}")
+    @NotNull(message = "{field.birthDate.required}")
     private LocalDate birthDate;
 
     public PersonDTO(Person entity){

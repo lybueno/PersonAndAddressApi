@@ -1,6 +1,7 @@
 package io.github.lybueno.attornatus.dto.address;
 
 import io.github.lybueno.attornatus.entities.Address;
+import io.github.lybueno.attornatus.entities.Person;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,8 @@ public class AddressDTO {
 
     private Long personId;
 
+    private boolean isMainAddress = false;
+
     public AddressDTO(Address entity){
         id = entity.getId();
         address = entity.getAddress();
@@ -37,6 +40,7 @@ public class AddressDTO {
         zipCode = entity.getZipCode();
         city = entity.getCity();
         personId = entity.getPerson().getId();
+        isMainAddress = entity.getIsMainAddress();
     }
 
 }

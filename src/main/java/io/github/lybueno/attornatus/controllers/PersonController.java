@@ -1,5 +1,6 @@
 package io.github.lybueno.attornatus.controllers;
 
+import io.github.lybueno.attornatus.dto.address.AddressDTO;
 import io.github.lybueno.attornatus.dto.person.PersonDTO;
 import io.github.lybueno.attornatus.dto.person.PersonInsertDTO;
 import io.github.lybueno.attornatus.services.PersonService;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/person")
@@ -50,10 +52,10 @@ public class PersonController {
             @ApiResponse(code = 201, message = "Person created")
     })
     @PostMapping(produces="application/json", consumes="application/json")
-    public ResponseEntity<PersonInsertDTO> insert(@Valid @RequestBody PersonInsertDTO dto){
-        dto = service.insert(dto);
+    public ResponseEntity<PersonDTO> insert(@Valid @RequestBody PersonInsertDTO dto){
+        PersonDTO newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-        return ResponseEntity.created(uri).body(dto);
+        return ResponseEntity.created(uri).body(newDto);
     }
 
     @ApiOperation(value = "Updates a person by ID")

@@ -35,18 +35,20 @@ public class PersonService {
     }
 
     @Transactional(readOnly = true)
-    public PersonInsertDTO findById(Long id) {
+    public PersonDTO findById(Long id) {
         Optional<Person> obj = repository.findById(id);
         Person entity = obj.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Person not found"));
-        return new PersonInsertDTO(entity, entity.getAddresses());
+        return new PersonDTO(entity);
     }
 
     @Transactional
-    public PersonInsertDTO insert(PersonInsertDTO dto) {
+    public PersonDTO insert(PersonInsertDTO dto) {
+        List<AddressDTO> proceddedListAddress = processAddresses(dto);
+        dto.setAddresses(proceddedListAddress);
         Person entity = new Person();
         copyInsertDtoToEntity(dto, entity);
         entity = repository.save(entity);
-        return new PersonInsertDTO(entity, entity.getAddresses());
+        return new PersonDTO(entity);
     }
 
     public PersonDTO update(Long id, PersonDTO dto) {
@@ -85,11 +87,42 @@ public class PersonService {
     private void copyInsertDtoToEntity(PersonInsertDTO dto, Person entity) {
 
         copyDtoToEntity(dto, entity);
-
         entity.getAddresses().clear();
         for(AddressDTO addressDTO : dto.getAddresses()){
-            Address address = addressRepository.getReferenceById(addressDTO.getId());
+            Address address = new Address();
+            copyDtoToEntityAddress(addressDTO, address);
+            address.setPerson(entity);
+            addressRepository.save(address);
             entity.getAddresses().add(address);
         }
+    }
+
+    private void copyDtoToEntityAddress(AddressDTO dto, Address entity) {
+
+        entity.setAddress(dto.getAddress());
+        entity.setNumber(dto.getNumber());
+        entity.setZipCode(dto.getZipCode());
+        entity.setCity(dto.getCity());
+        entity.setIsMainAddress(dto.isMainAddress());
+
+    }
+
+    private List<AddressDTO> processAddresses(PersonInsertDTO dto) {
+        List<AddressDTO> addressDTOList = dto.getAddresses();
+        int countMainAddress = 0;
+        for (AddressDTO address: addressDTOList) {
+            if(address.isMainAddress()){
+                countMainAddress++;
+            }
+        }
+        if(countMainAddress != 1){
+            addressDTOList.get(0).setMainAddress(true);
+        }
+        if(addressDTOList.size() > 1){
+            for (int i = 1; i < addressDTOList.size(); i++) {
+                addressDTOList.get(i).setMainAddress(false);
+            }
+        }
+        return addressDTOList;
     }
 }
