@@ -97,7 +97,7 @@ public class PersonController {
     @PostMapping(value = "/{id}/address" ,produces="application/json", consumes="application/json")
     public ResponseEntity<AddressDTO> createAddress(@PathVariable Long id, @Valid @RequestBody AddressDTO dto){
         AddressDTO newDto = service.createAddressToPerson(id, dto);
-        URI uri =
+       URI uri =
                 ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}/address").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(newDto);
     }

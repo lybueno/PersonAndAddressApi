@@ -98,6 +98,7 @@ public class PersonService {
 
     }
 
+    @Transactional
     public AddressDTO createAddressToPerson(Long id, AddressDTO dto) {
         Person entity = findPerson(id);
         if(dto.isMainAddress()){
