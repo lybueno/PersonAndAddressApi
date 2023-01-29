@@ -79,7 +79,7 @@ public class PersonController {
         return ResponseEntity.ok().body(service.findAllByPersonId(id));
     }
 
-    @ApiOperation(value = "Returns mainaddress by person ID")
+    @ApiOperation(value = "Returns main address by person ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Returns person's main address"),
             @ApiResponse(code = 404, message = "Person not found")

@@ -159,14 +159,18 @@ public class PersonService {
                 countMainAddress++;
             }
         }
-        if(countMainAddress != 1){
+        if(countMainAddress == 0){
             addressDTOList.get(0).setMainAddress(true);
-        }
-        if(addressDTOList.size() > 1){
-            for (int i = 1; i < addressDTOList.size(); i++) {
-                addressDTOList.get(i).setMainAddress(false);
+        } else {
+            for(int j = 0; j < addressDTOList.size() - 1; j++){
+                for (int i = 1; i < addressDTOList.size(); i++) {
+                    if(addressDTOList.get(j).isMainAddress() && addressDTOList.get(j).isMainAddress()) {
+                        addressDTOList.get(i).setMainAddress(false);
+                    }
+                }
             }
         }
+
         return addressDTOList;
     }
 

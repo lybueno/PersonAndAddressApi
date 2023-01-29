@@ -212,5 +212,5 @@ class PersonControllerTest {
         result.andExpect(jsonPath("$.city").exists());
         result.andExpect(jsonPath("$.mainAddress").exists());
     }
-    
+
 }
