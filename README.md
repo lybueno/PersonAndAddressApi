@@ -1,5 +1,5 @@
 # Person and Address API
-***
+
 ### Sobre a aplicação:
 
 A aplicação foi desenvolvida utilizando a linguagem Java, Spring, banco de dados H2 e arquitetura flexível baseada 
