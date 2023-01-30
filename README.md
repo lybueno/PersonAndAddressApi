@@ -9,14 +9,14 @@ O sistema desenvolvido consiste em uma ferramenta para gerenciamento de cadastro
 endereços.
 É possível por meio do sistema:
 - Cadastrar pessoa,
-- Editar pessoas previamente cadastrada,
+- Editar pessoas previamente cadastradas,
 - Consultar o cadastro de uma pessoa informando seu ID,
 - Consultar todas as pessoas já cadastradas,
 - Criar endereço(s) para uma pessoa já cadastrada,
 - Consultar todos endereços cadastrados de uma pessoa já cadastrada,
 - Consultar o endereço principal de uma pessoa cadastrada.
 
-A aplicação foi documentada com Swagger e pode ser acessada pelo endereço <http://localhost:8080/swagger-ui/index.html> após rodar a aplicação. Também épossível utilizar a documentação para testar as funcionalidades da API.
+A aplicação foi documentada com Swagger e pode ser acessada pelo endereço <http://localhost:8080/swagger-ui/index.html> após rodar a aplicação. Também é possível utilizar a documentação para testar as funcionalidades da API.
 ***
 ### Ferramentas necessárias:
 - JDK 17;
